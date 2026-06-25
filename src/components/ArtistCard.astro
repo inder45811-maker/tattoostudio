@@ -1,0 +1,72 @@
+---
+/*
+  An artist card — portrait frame plus name, role, optional bio and an
+  Instagram handle / call-to-action link.
+*/
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  name: string;
+  role: string;
+  /** Visible link text, e.g. "@cj_humps_tattoos" or "Get in touch →". */
+  handle: string;
+  /** Link target for the handle. */
+  handleHref: string;
+  /** Caption shown on the portrait frame, e.g. "Portrait · your photo". */
+  figtag: string;
+  /** Accessible name for the portrait frame. */
+  ariaLabel: string;
+  /** Optional short bio paragraph. */
+  bio?: string;
+  /** Use the "now hiring" tint. */
+  hiring?: boolean;
+  /** Portrait path under /public, or null for the placeholder. */
+  image?: string | null;
+}
+const {
+  name,
+  role,
+  handle,
+  handleHref,
+  figtag,
+  ariaLabel,
+  bio,
+  hiring = false,
+  image = null,
+} = Astro.props;
+
+const external = handleHref.startsWith('http');
+---
+<article class="card" data-reveal>
+  {image ? (
+    <div class:list={['card-fig', { hiring }]}>
+      <img src={image} alt={ariaLabel} loading="lazy" decoding="async" width="600" height="600" />
+      <span class="figtag cap">{figtag}</span>
+    </div>
+  ) : (
+    <div class:list={['card-fig', { hiring }]} role="img" aria-label={ariaLabel}>
+      <Placeholder />
+      <span class="figtag cap">{figtag}</span>
+    </div>
+  )}
+  <div class="card-body">
+    <h3>{name}</h3>
+    <span class="card-role">{role}</span>
+    {bio && <p>{bio}</p>}
+    <a
+      class="card-handle"
+      href={handleHref}
+      {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+    >{handle}</a>
+  </div>
+</article>
+
+<style>
+  .card-fig img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+/*
+  The Making Marks "M" monogram mark.
+  Used in the nav, hero watermark, placeholder frames and footer.
+  Pass an extra class to size/style it via the parent context (see global.css
+  rules like `.brand .mark`, `.foot .mark`, `.figmark .mark`).
+*/
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<svg class:list={['mark', className]} viewBox="0 0 100 100" aria-hidden="true">
+  <path d="M18 84 V20 L50 56 L82 20 V84"></path>
+</svg>

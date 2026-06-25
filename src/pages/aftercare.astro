@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBook from '../components/SectionBook.astro';
+import { SITE, breadcrumbSchema, aftercareArticleSchema } from '../data/site';
+---
+<BaseLayout
+  title="Tattoo Aftercare Guide | Making Marks Tattoo Co, Leamington Spa"
+  description="How to look after a new tattoo — Making Marks’ aftercare guide covering the first 48 hours, healing, and keeping black & grey work sharp. Leamington Spa."
+  canonical={`${SITE.url}/aftercare`}
+  ogType="article"
+  jsonLd={[breadcrumbSchema('Aftercare', '/aftercare'), aftercareArticleSchema]}
+>
+  <section class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Aftercare</i></nav>
+    <h1 class="disp" data-reveal>Tattoo aftercare</h1>
+    <p class="lede" data-reveal>A new tattoo is an open wound — looking after it well keeps the work crisp for years. Here’s our general guidance.</p>
+  </section>
+
+  <section class="section" style="padding-top:clamp(40px,6vw,72px)">
+    <div class="prose">
+      <h2 class="first" data-reveal>The first 24–48 hours</h2>
+      <ul>
+        <li data-reveal>Leave the covering on for as long as your artist advises.</li>
+        <li data-reveal>Wash gently with clean hands and a fragrance-free soap, then pat dry with a clean towel.</li>
+        <li data-reveal>Apply a thin layer of the aftercare balm we recommend — less is more.</li>
+      </ul>
+      <h2 data-reveal>While it heals (roughly two weeks)</h2>
+      <ul>
+        <li data-reveal>Keep it clean and moisturise lightly two to three times a day.</li>
+        <li data-reveal>Don’t pick or scratch — flaking and light scabbing is normal, let it fall away on its own.</li>
+        <li data-reveal>Avoid soaking: no baths, swimming, saunas or steam rooms.</li>
+        <li data-reveal>Avoid tight clothing rubbing over the area.</li>
+      </ul>
+      <h2 data-reveal>Once it’s healed</h2>
+      <ul>
+        <li data-reveal>Keep it out of direct sun while healing, and use a high SPF afterwards to keep black &amp; grey looking sharp.</li>
+        <li data-reveal>Moisturise regularly — well-kept skin holds a tattoo beautifully over time.</li>
+      </ul>
+      <div class="callout" data-reveal><strong>If something doesn’t feel right</strong> — increasing redness, swelling, heat or any discharge — speak to a pharmacist or GP. And always follow the specific aftercare advice your artist gives you on the day; it takes priority over any general guide.</div>
+    </div>
+  </section>
+
+  <SectionBook title="Questions about your healing?" text="Drop us a message — we’re happy to help at any stage.">
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.email}>Email us</a>
+  </SectionBook>
+</BaseLayout>

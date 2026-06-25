@@ -1,0 +1,18 @@
+---
+/*
+  The "ready to book" CTA band. Title and body copy vary per page; the buttons
+  are passed in as children so each page supplies its own exact set of CTAs.
+*/
+interface Props {
+  title: string;
+  text: string;
+}
+const { title, text } = Astro.props;
+---
+<section class="section book">
+  <h2 class="disp" data-reveal>{title}</h2>
+  <p data-reveal>{text}</p>
+  <div class="book-cta" data-reveal>
+    <slot />
+  </div>
+</section>

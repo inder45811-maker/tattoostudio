@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkTile from '../components/WorkTile.astro';
+import SectionBook from '../components/SectionBook.astro';
+import { SITE, breadcrumbSchema } from '../data/site';
+import { tattooGroups } from '../data/tattoos';
+---
+<BaseLayout
+  title="Tattoo Portfolio — Black & Grey, Realism & Fine Line | Making Marks, Leamington Spa"
+  description="Browse black & grey tattoo work by Making Marks Tattoo Co in Leamington Spa — realism, fine line, lettering and cover-ups. Custom designs, drawn from scratch."
+  canonical={`${SITE.url}/tattoos`}
+  ogType="website"
+  jsonLd={[breadcrumbSchema('Tattoos', '/tattoos')]}
+>
+  <section class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Tattoos</i></nav>
+    <h1 class="disp" data-reveal>Tattoos</h1>
+    <p class="lede" data-reveal>Black &amp; grey realism, fine line and custom lettering — every design drawn from scratch and tattooed in our Leamington Spa studio. A selection of recent work below.</p>
+  </section>
+
+  <section class="section" style="padding-top:clamp(48px,7vw,84px)">
+    {tattooGroups.map((group, i) => (
+      <div class:list={['style-block', { first: i === 0 }]}>
+        <div class="sb-head">
+          <h2 class="disp">{group.heading}</h2>
+          <span class="cap">{group.caption}</span>
+        </div>
+        <div class="preview-grid">
+          {group.items.map((item) => (
+            <WorkTile label={item.label} alt={item.alt} image={item.image} />
+          ))}
+        </div>
+      </div>
+    ))}
+    <p class="grid-note cap" data-reveal>Placeholder layout — your real pieces drop straight into these frames, grouped by style for search.</p>
+  </section>
+
+  <SectionBook
+    title="Got an idea in mind?"
+    text="Send us a reference or a rough brief and we’ll design something made just for you."
+  >
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire on Instagram</a>
+    <a class="btn btn--ghost" href="/visit">Plan your visit</a>
+  </SectionBook>
+</BaseLayout>

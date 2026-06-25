@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArtistCard from '../components/ArtistCard.astro';
+import SectionBook from '../components/SectionBook.astro';
+import { SITE, breadcrumbSchema, connorPersonSchema } from '../data/site';
+---
+<BaseLayout
+  title="Our Artists — Black & Grey Tattooists | Making Marks, Leamington Spa"
+  description="Meet the artists at Making Marks Tattoo Co in Leamington Spa, led by owner Connor Humpage — black & grey realism, fine line and lettering specialists."
+  canonical={`${SITE.url}/artists`}
+  ogType="website"
+  jsonLd={[breadcrumbSchema('Artists', '/artists'), connorPersonSchema]}
+>
+  <section class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Artists</i></nav>
+    <h1 class="disp" data-reveal>Artists</h1>
+    <p class="lede" data-reveal>The hands behind the work at Making Marks, Leamington Spa.</p>
+  </section>
+
+  <section class="section" style="padding-top:clamp(40px,6vw,72px)">
+    <div class="artists-grid" style="margin-top:0">
+      <ArtistCard
+        name="Connor Humpage"
+        role="Owner · Black & grey"
+        bio="Founder of Making Marks and a black & grey specialist, working in realism, fine line and lettering."
+        handle="@cj_humps_tattoos"
+        handleHref={SITE.links.connorInstagram}
+        figtag="Portrait · your photo"
+        ariaLabel="Connor Humpage, black and grey tattoo artist and owner"
+      />
+      <ArtistCard
+        name="Resident artist"
+        role="Add name · style"
+        bio="Add a short bio and specialism here — and link their Instagram so clients can see their work."
+        handle="@handle"
+        handleHref="#"
+        figtag="Portrait · your photo"
+        ariaLabel="Resident artist placeholder"
+      />
+      <ArtistCard
+        name="Join the studio"
+        role="We’re taking on artists"
+        bio="Like what you see? We’re always keen to hear from talented black & grey artists."
+        handle="Get in touch →"
+        handleHref={SITE.links.instagram}
+        figtag="Now hiring"
+        ariaLabel="Now hiring tattoo artists at Making Marks"
+        hiring
+      />
+    </div>
+  </section>
+
+  <SectionBook
+    title="Book with the team."
+    text="Message us with your idea and we’ll match you with the right artist."
+  >
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
+  </SectionBook>
+</BaseLayout>

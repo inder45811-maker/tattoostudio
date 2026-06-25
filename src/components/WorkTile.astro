@@ -1,0 +1,37 @@
+---
+/*
+  A single portfolio image tile — hover-zoom frame with a caption.
+  Renders a real photo when `image` is set, otherwise the monogram placeholder.
+*/
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  /** Short visible caption (the figtag). */
+  label: string;
+  /** Descriptive accessible name for the piece. */
+  alt: string;
+  /** Path under /public, or null/undefined for the placeholder frame. */
+  image?: string | null;
+  class?: string;
+}
+const { label, alt, image = null, class: className } = Astro.props;
+---
+{image ? (
+  <div class:list={['tile', className]}>
+    <div class="ph"><img src={image} alt={alt} loading="lazy" decoding="async" width="800" height="1000" /></div>
+    <span class="figtag cap">{label}</span>
+  </div>
+) : (
+  <div class:list={['tile', className]} role="img" aria-label={alt}>
+    <div class="ph"><Placeholder /></div>
+    <span class="figtag cap">{label}</span>
+  </div>
+)}
+
+<style>
+  .tile .ph img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

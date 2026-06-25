@@ -1,0 +1,104 @@
+---
+/*
+  Base layout — owns the document <head> (SEO, social, favicon, JSON-LD),
+  loads the self-hosted Archivo Variable font and global styles, and frames
+  every page with the nav, main region and footer plus the global behaviour
+  script (solid-on-scroll nav + scroll-reveal that respects reduced motion).
+*/
+import '@fontsource-variable/archivo/standard.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Full canonical URL, exactly as in the prototype (e.g. SITE.url + '/visit'). */
+  canonical: string;
+  ogType?: 'website' | 'article';
+  /** One or more JSON-LD objects rendered as <script type="application/ld+json">. */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description, canonical, ogType = 'website', jsonLd = [] } = Astro.props;
+
+// Inline "M" monogram favicon (no extra request). Matches the prototype exactly.
+const favicon =
+  "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20fill%3D%27%230B0B0C%27/%3E%3Cpath%20d%3D%27M22%2080%20V24%20L50%2056%20L78%2024%20V80%27%20fill%3D%27none%27%20stroke%3D%27%23F2F1EF%27%20stroke-width%3D%279%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E";
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#0B0B0C" />
+    <link rel="icon" href={favicon} />
+    <link rel="apple-touch-icon" href={favicon} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Making Marks Tattoo Co" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={SITE.ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={SITE.ogImage} />
+
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <Nav />
+    <main id="top">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      (function () {
+        var nav = document.getElementById('nav');
+        var onScroll = function () {
+          if (window.scrollY > 40) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var items = document.querySelectorAll('[data-reveal]');
+        if (reduce || !('IntersectionObserver' in window)) {
+          items.forEach(function (el) {
+            el.classList.add('in');
+          });
+        } else {
+          var io = new IntersectionObserver(
+            function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('in');
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          );
+          items.forEach(function (el) {
+            io.observe(el);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

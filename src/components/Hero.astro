@@ -1,0 +1,23 @@
+---
+/*
+  Full-bleed home hero. Carries the single <h1> for the home page.
+  The media frame is a placeholder until a real featured piece is dropped in.
+*/
+import Placeholder from './Placeholder.astro';
+import { SITE } from '../data/site';
+---
+<header class="hero">
+  <div class="hero-media" aria-hidden="true"><Placeholder /></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <span class="hero-tag cap" role="img" aria-label="Featured black and grey tattoo, image placeholder">Featured · your work here</span>
+  <div class="hero-inner">
+    <span class="eyebrow" data-reveal>Making Marks — Est. 2021</span>
+    <h1 class="disp" data-reveal>Black &amp; grey,<br />done properly.</h1>
+    <p class="lede" data-reveal>Custom tattoos, drawn from scratch — to your idea, your story, your skin. In the heart of Royal Leamington Spa.</p>
+    <div class="hero-cta" data-reveal>
+      <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire to book</a>
+      <a class="btn btn--ghost" href="/tattoos">View the work</a>
+    </div>
+  </div>
+  <span class="scrollcue">Scroll</span>
+</header>

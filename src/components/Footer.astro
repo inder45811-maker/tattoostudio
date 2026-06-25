@@ -1,0 +1,41 @@
+---
+/*
+  Site footer — brand, explore links, studio details and connect links.
+  Identical on every page.
+*/
+import Monogram from './Monogram.astro';
+import { SITE, FOOTER_LINKS } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <Monogram />
+      <b>Making Marks Tattoo Co.</b>
+      <p>Custom black &amp; grey tattooing in Royal Leamington Spa. Established 2021.</p>
+      <p class="memory">In memory of Mark</p>
+    </div>
+    <div class="foot-col">
+      <h5>Explore</h5>
+      {FOOTER_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+    </div>
+    <div class="foot-col">
+      <h5>Studio</h5>
+      <p>102 Regent Street</p>
+      <p>Royal Leamington Spa</p>
+      <p>CV32 4NR</p>
+      <p>Tue–Sat, 10–5</p>
+    </div>
+    <div class="foot-col">
+      <h5>Connect</h5>
+      <a href={SITE.links.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
+      <a href={SITE.links.email}>info@makingmarks-tattoo.co.uk</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© {year} Making Marks Tattoo Co.</span>
+    <a href="https://vectormoon.co.uk" target="_blank" rel="noopener">Concept design — vectorMoon</a>
+  </div>
+</footer>

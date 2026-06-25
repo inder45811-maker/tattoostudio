@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import WorkTile from '../components/WorkTile.astro';
+import ArtistCard from '../components/ArtistCard.astro';
+import MapPlaceholder from '../components/MapPlaceholder.astro';
+import SectionBook from '../components/SectionBook.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { SITE, tattooParlorSchema } from '../data/site';
+import { homePreview } from '../data/tattoos';
+---
+<BaseLayout
+  title="Making Marks Tattoo Co | Black & Grey Tattoo Studio in Leamington Spa"
+  description="Custom black & grey tattoos in the heart of Royal Leamington Spa. Bespoke realism, fine line and lettering by Making Marks Tattoo Co. Established 2021."
+  canonical={`${SITE.url}/`}
+  ogType="website"
+  jsonLd={[tattooParlorSchema]}
+>
+  <Hero />
+
+  <section class="strip">
+    <p>Every piece is yours alone — designed around the idea you walk in with.</p>
+    <span class="cap">Realism · Fine line · Lettering · Cover-ups</span>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <div>
+        <span class="eyebrow" data-reveal>Selected work</span>
+        <h2 class="disp" data-reveal style="margin-top:.2em">Recent pieces</h2>
+      </div>
+      <a class="morelink" data-reveal href="/tattoos">View all tattoos →</a>
+    </div>
+    <div class="preview-grid">
+      {homePreview.map((item) => (
+        <WorkTile label={item.label} alt={item.alt} image={item.image} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section story">
+    <div class="story-wrap">
+      <div>
+        <span class="eyebrow" data-reveal>The name</span>
+        <h2 class="disp" data-reveal>Making my mark.</h2>
+        <p data-reveal>Making Marks was founded in 2021 in memory of Connor’s dad, Mark — his biggest supporter, and his best mate. The studio carries that legacy on.</p>
+        <a class="morelink" data-reveal href="/our-story">Read our story →</a>
+      </div>
+      <div class="story-fig" data-reveal role="img" aria-label="Inside Making Marks tattoo studio, Leamington Spa">
+        <Placeholder />
+        <span class="figtag cap">In the studio · your photo here</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="head">
+      <div>
+        <span class="eyebrow" data-reveal>The team</span>
+        <h2 class="disp" data-reveal style="margin-top:.2em">Artists</h2>
+      </div>
+      <a class="morelink" data-reveal href="/artists">Meet the artists →</a>
+    </div>
+    <div class="artists-grid">
+      <ArtistCard
+        name="Connor Humpage"
+        role="Owner · Black & grey"
+        handle="@cj_humps_tattoos"
+        handleHref={SITE.links.connorInstagram}
+        figtag="Portrait · your photo"
+        ariaLabel="Connor Humpage, tattoo artist and owner"
+      />
+      <ArtistCard
+        name="Resident artist"
+        role="Add name · style"
+        handle="@handle"
+        handleHref="#"
+        figtag="Portrait · your photo"
+        ariaLabel="Resident tattoo artist placeholder"
+      />
+      <ArtistCard
+        name="Join the studio"
+        role="We’re taking on artists"
+        handle="Get in touch →"
+        handleHref={SITE.links.instagram}
+        figtag="Now hiring"
+        ariaLabel="Now hiring tattoo artists"
+        hiring
+      />
+    </div>
+  </section>
+
+  <section class="section visit">
+    <div class="visit-wrap">
+      <div>
+        <span class="eyebrow" data-reveal>Visit</span>
+        <h2 data-reveal>102 Regent Street,<br />Royal Leamington Spa</h2>
+        <p class="addr" data-reveal>CV32 4NR</p>
+        <div class="rows" data-reveal>
+          <div class="row closed"><span>Mon</span><span>Closed</span></div>
+          <div class="row"><span>Tue — Sat</span><span>10:00 — 17:00</span></div>
+          <div class="row closed"><span>Sun</span><span>Closed</span></div>
+        </div>
+        <a class="morelink" data-reveal href="/visit">Plan your visit →</a>
+      </div>
+      <MapPlaceholder />
+    </div>
+  </section>
+
+  <SectionBook
+    title="Ready to make yours?"
+    text="Tattoo enquiries are taken through Instagram DM. We’ll talk through your idea, then confirm your booking on Fresha."
+  >
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
+    <a class="btn btn--ghost" href={SITE.links.email}>Email us</a>
+  </SectionBook>
+</BaseLayout>

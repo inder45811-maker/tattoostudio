@@ -1,0 +1,157 @@
+---
+/*
+  Fixed top nav. Gains a solid background + hairline after scrolling ~40px
+  (handled by the global script in BaseLayout). Inline links show above 760px;
+  at or below 760px a hamburger button opens a stacked dropdown menu that closes
+  on selection, Escape, or resize back to desktop.
+*/
+import Monogram from './Monogram.astro';
+import { SITE, NAV_LINKS } from '../data/site';
+
+// Normalise the current path (drop trailing slash) to mark the active link.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => path === href;
+---
+<nav class="nav" id="nav">
+  <a class="brand" href="/" aria-label="Making Marks Tattoo Co — home">
+    <Monogram /><b>Making&nbsp;Marks</b>
+  </a>
+  <div class="navlinks">
+    {NAV_LINKS.map((l) => (
+      <a
+        href={l.href}
+        class={isActive(l.href) ? 'active' : undefined}
+        aria-current={isActive(l.href) ? 'page' : undefined}
+      >{l.label}</a>
+    ))}
+  </div>
+  <a class="btn btn--solid nav-cta" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire</a>
+  <button
+    class="navtoggle"
+    id="navtoggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    aria-label="Open menu"
+  ><span class="navtoggle-icon" aria-hidden="true">☰</span></button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  {NAV_LINKS.map((l) => (
+    <a
+      href={l.href}
+      class={isActive(l.href) ? 'active' : undefined}
+      aria-current={isActive(l.href) ? 'page' : undefined}
+    >{l.label}</a>
+  ))}
+  <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire</a>
+</div>
+
+<style>
+  /* Hamburger button — hidden on desktop, shown at <=760px. */
+  .navtoggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: var(--paper);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px;
+    margin: -6px;
+  }
+  .navtoggle-icon {
+    display: block;
+    width: 1em;
+    text-align: center;
+  }
+
+  /* Mobile dropdown panel — removed from the layout on desktop. */
+  .mobile-menu {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .nav .navlinks,
+    .nav .nav-cta {
+      display: none;
+    }
+    .navtoggle {
+      display: inline-flex;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 49;
+      display: flex;
+      flex-direction: column;
+      padding: 82px var(--mx) 30px;
+      background: rgba(11, 11, 12, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-100%);
+      visibility: hidden;
+      transition: transform 0.35s ease, visibility 0.35s ease;
+    }
+    .mobile-menu.open {
+      transform: none;
+      visibility: visible;
+    }
+    .mobile-menu a:not(.btn) {
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey);
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      transition: color 0.2s ease;
+    }
+    .mobile-menu a:not(.btn):hover,
+    .mobile-menu a.active {
+      color: var(--paper);
+    }
+    .mobile-menu .btn {
+      margin-top: 20px;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('navtoggle');
+  const menu = document.getElementById('mobile-menu');
+  const nav = document.getElementById('nav');
+
+  if (toggle && menu) {
+    const icon = toggle.querySelector('.navtoggle-icon');
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('open', open);
+      nav?.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.textContent = open ? '✕' : '☰';
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+    window.matchMedia('(min-width: 761px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>

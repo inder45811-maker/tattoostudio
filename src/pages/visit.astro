@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MapPlaceholder from '../components/MapPlaceholder.astro';
+import SectionBook from '../components/SectionBook.astro';
+import { SITE, breadcrumbSchema, tattooParlorSchema } from '../data/site';
+---
+<BaseLayout
+  title="Visit Us — 102 Regent Street, Leamington Spa | Making Marks Tattoo Co"
+  description="Find Making Marks Tattoo Co at 102 Regent Street, Royal Leamington Spa, CV32 4NR. Opening hours, parking and how to book your black & grey tattoo."
+  canonical={`${SITE.url}/visit`}
+  ogType="website"
+  jsonLd={[breadcrumbSchema('Visit', '/visit'), tattooParlorSchema]}
+>
+  <section class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Visit</i></nav>
+    <h1 class="disp" data-reveal>Visit us</h1>
+    <p class="lede" data-reveal>Find us on Regent Street in the centre of Royal Leamington Spa — a short walk from the Parade and Royal Priors.</p>
+  </section>
+
+  <section class="section visit" style="border-top:none">
+    <div class="visit-wrap">
+      <div>
+        <span class="eyebrow" data-reveal>The studio</span>
+        <h2 data-reveal>102 Regent Street,<br />Royal Leamington Spa</h2>
+        <p class="addr" data-reveal>CV32 4NR</p>
+        <div class="rows" data-reveal>
+          <div class="row closed"><span>Monday</span><span>Closed</span></div>
+          <div class="row"><span>Tuesday</span><span>10:00 — 17:00</span></div>
+          <div class="row"><span>Wednesday</span><span>10:00 — 17:00</span></div>
+          <div class="row"><span>Thursday</span><span>10:00 — 17:00</span></div>
+          <div class="row"><span>Friday</span><span>10:00 — 17:00</span></div>
+          <div class="row"><span>Saturday</span><span>10:00 — 17:00</span></div>
+          <div class="row closed"><span>Sunday</span><span>Closed</span></div>
+        </div>
+        <div class="parking" data-reveal>
+          <h4>Parking nearby</h4>
+          <p>St Peter’s Multi-Storey — Augusta Place, CV32 5EL</p>
+          <p>Covent Garden — Russel Street, CV32 5QB</p>
+          <small>Both hold 380+ cars and are a short walk from the studio.</small>
+        </div>
+      </div>
+      <MapPlaceholder />
+    </div>
+  </section>
+
+  <SectionBook
+    title="Booking & enquiries"
+    text="Tattoo enquiries are taken through Instagram DM. We’ll talk through your idea, then confirm your booking on Fresha."
+  >
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
+    <a class="btn btn--ghost" href={SITE.links.email}>info@makingmarks-tattoo.co.uk</a>
+  </SectionBook>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBook from '../components/SectionBook.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { SITE, breadcrumbSchema } from '../data/site';
+---
+<BaseLayout
+  title="Our Story — In Memory of Mark | Making Marks Tattoo Co, Leamington Spa"
+  description="The story behind Making Marks Tattoo Co — founded in 2021 in Royal Leamington Spa in memory of Mark, specialising in custom black & grey tattoos."
+  canonical={`${SITE.url}/our-story`}
+  ogType="article"
+  jsonLd={[breadcrumbSchema('Our story', '/our-story')]}
+>
+  <section class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Our story</i></nav>
+    <h1 class="disp" data-reveal>Making my mark.</h1>
+    <p class="lede" data-reveal>How Making Marks began — and the name it carries.</p>
+  </section>
+
+  <section class="section story" style="border-top:none">
+    <div class="story-wrap">
+      <div>
+        <span class="eyebrow" data-reveal>The name</span>
+        <h2 class="disp" data-reveal style="font-size:clamp(32px,4.8vw,64px)">In memory of Mark</h2>
+        <p data-reveal>Making Marks Tattoo Co. was founded in 2021 in memory of my dad, Mark. He wasn’t just my biggest supporter in tattooing — he was my best mate. After losing him suddenly in 2019, it felt right to carry his legacy on.</p>
+        <p class="pull disp" data-reveal>Now it’s time to make my mark.</p>
+        <span class="byline" data-reveal>— Connor Humpage, founder</span>
+      </div>
+      <div class="story-fig" data-reveal role="img" aria-label="Connor Humpage tattooing in the Making Marks studio">
+        <Placeholder />
+        <span class="figtag cap">In the studio · your photo here</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2 class="first" data-reveal>The studio</h2>
+      <p data-reveal>Set in the heart of Royal Leamington Spa on Regent Street, the studio was built to turn getting tattooed into something you look forward to — a calm, considered space with interiors to match the work that comes out of it.</p>
+      <h2 data-reveal>How we work</h2>
+      <p data-reveal>We specialise in custom, high-quality black &amp; grey tattoos. Every design is created around you: bring us a clear idea, a few references, or just a feeling, and we’ll design a piece that’s yours alone. Whether it’s a full sleeve in fine realism or a single line of script, the brief always starts with you.</p>
+      <div class="callout" data-reveal><strong>Ready to start?</strong> Tattoo enquiries are taken through Instagram DM — drop us a message with your idea and we’ll take it from there.</div>
+    </div>
+  </section>
+
+  <SectionBook title="Make your mark with us." text="We’d love to hear what you’ve got in mind.">
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire on Instagram</a>
+    <a class="btn btn--ghost" href="/tattoos">See the work</a>
+  </SectionBook>
+</BaseLayout>
