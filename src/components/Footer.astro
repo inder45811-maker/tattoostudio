@@ -4,7 +4,7 @@
   Identical on every page.
 */
 import Monogram from './Monogram.astro';
-import { SITE, FOOTER_LINKS } from '../data/site';
+import { SITE, FOOTER_LINKS, withBase } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
@@ -18,7 +18,7 @@ const year = new Date().getFullYear();
     </div>
     <div class="foot-col">
       <h5>Explore</h5>
-      {FOOTER_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+      {FOOTER_LINKS.map((l) => <a href={withBase(l.href)}>{l.label}</a>)}
     </div>
     <div class="foot-col">
       <h5>Studio</h5>

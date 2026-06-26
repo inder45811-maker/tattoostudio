@@ -6,7 +6,7 @@ import ArtistCard from '../components/ArtistCard.astro';
 import MapPlaceholder from '../components/MapPlaceholder.astro';
 import SectionBook from '../components/SectionBook.astro';
 import Placeholder from '../components/Placeholder.astro';
-import { SITE, tattooParlorSchema } from '../data/site';
+import { SITE, withBase, tattooParlorSchema } from '../data/site';
 import { homePreview } from '../data/tattoos';
 ---
 <BaseLayout
@@ -29,7 +29,7 @@ import { homePreview } from '../data/tattoos';
         <span class="eyebrow" data-reveal>Selected work</span>
         <h2 class="disp" data-reveal style="margin-top:.2em">Recent pieces</h2>
       </div>
-      <a class="morelink" data-reveal href="/tattoos">View all tattoos →</a>
+      <a class="morelink" data-reveal href={withBase('/tattoos')}>View all tattoos →</a>
     </div>
     <div class="preview-grid">
       {homePreview.map((item) => (
@@ -44,7 +44,7 @@ import { homePreview } from '../data/tattoos';
         <span class="eyebrow" data-reveal>The name</span>
         <h2 class="disp" data-reveal>Making my mark.</h2>
         <p data-reveal>Making Marks was founded in 2021 in memory of Connor’s dad, Mark — his biggest supporter, and his best mate. The studio carries that legacy on.</p>
-        <a class="morelink" data-reveal href="/our-story">Read our story →</a>
+        <a class="morelink" data-reveal href={withBase('/our-story')}>Read our story →</a>
       </div>
       <div class="story-fig" data-reveal role="img" aria-label="Inside Making Marks tattoo studio, Leamington Spa">
         <Placeholder />
@@ -59,7 +59,7 @@ import { homePreview } from '../data/tattoos';
         <span class="eyebrow" data-reveal>The team</span>
         <h2 class="disp" data-reveal style="margin-top:.2em">Artists</h2>
       </div>
-      <a class="morelink" data-reveal href="/artists">Meet the artists →</a>
+      <a class="morelink" data-reveal href={withBase('/artists')}>Meet the artists →</a>
     </div>
     <div class="artists-grid">
       <ArtistCard
@@ -101,7 +101,7 @@ import { homePreview } from '../data/tattoos';
           <div class="row"><span>Tue — Sat</span><span>10:00 — 17:00</span></div>
           <div class="row closed"><span>Sun</span><span>Closed</span></div>
         </div>
-        <a class="morelink" data-reveal href="/visit">Plan your visit →</a>
+        <a class="morelink" data-reveal href={withBase('/visit')}>Plan your visit →</a>
       </div>
       <MapPlaceholder />
     </div>

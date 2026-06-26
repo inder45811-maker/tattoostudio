@@ -3,21 +3,29 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Production site for Making Marks Tattoo Co.
-// Static output — every page renders to a single clean URL.
+const ORIGIN = 'https://makingmarks-tattoo.co.uk';
+
+// Deploy base path. Defaults to '/' (custom domain). The GitHub Pages workflow
+// sets PUBLIC_BASE=/tattoostudio/ so assets + links resolve under the project
+// subpath at https://<user>.github.io/tattoostudio/. Flip back to '/' (just
+// don't set PUBLIC_BASE) once the custom domain is live.
+const base = process.env.PUBLIC_BASE || '/';
+const basePath = base.replace(/\/$/, ''); // '' for root, '/tattoostudio' otherwise
+
 export default defineConfig({
-  site: 'https://makingmarks-tattoo.co.uk',
+  site: ORIGIN,
+  base,
   output: 'static',
   integrations: [
     sitemap({
-      // Match each page's <link rel="canonical">: the home page keeps its
-      // trailing slash, every other route has none.
+      // Sitemap entries always describe the production origin, regardless of the
+      // deploy base: strip the base segment, keep the home page's trailing slash
+      // and drop it from every other route (matching each page's canonical).
       serialize(item) {
-        const root = 'https://makingmarks-tattoo.co.uk';
-        if (item.url === root || item.url === `${root}/`) {
-          item.url = `${root}/`;
-        } else {
-          item.url = item.url.replace(/\/$/, '');
-        }
+        let url = item.url;
+        if (basePath) url = url.replace(`${ORIGIN}${basePath}`, ORIGIN);
+        url = url === ORIGIN || url === `${ORIGIN}/` ? `${ORIGIN}/` : url.replace(/\/$/, '');
+        item.url = url;
         return item;
       },
     }),

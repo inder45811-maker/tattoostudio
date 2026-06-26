@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MapPlaceholder from '../components/MapPlaceholder.astro';
 import SectionBook from '../components/SectionBook.astro';
-import { SITE, breadcrumbSchema, tattooParlorSchema } from '../data/site';
+import { SITE, withBase, breadcrumbSchema, tattooParlorSchema } from '../data/site';
 ---
 <BaseLayout
   title="Visit Us — 102 Regent Street, Leamington Spa | Making Marks Tattoo Co"
@@ -12,7 +12,7 @@ import { SITE, breadcrumbSchema, tattooParlorSchema } from '../data/site';
   jsonLd={[breadcrumbSchema('Visit', '/visit'), tattooParlorSchema]}
 >
   <section class="pagehead">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Visit</i></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Visit</i></nav>
     <h1 class="disp" data-reveal>Visit us</h1>
     <p class="lede" data-reveal>Find us on Regent Street in the centre of Royal Leamington Spa — a short walk from the Parade and Royal Priors.</p>
   </section>

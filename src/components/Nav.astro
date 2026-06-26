@@ -6,20 +6,23 @@
   on selection, Escape, or resize back to desktop.
 */
 import Monogram from './Monogram.astro';
-import { SITE, NAV_LINKS } from '../data/site';
+import { SITE, NAV_LINKS, withBase } from '../data/site';
 
-// Normalise the current path (drop trailing slash) to mark the active link.
-const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const isActive = (href: string) => path === href;
+// Normalise the current path — strip the deploy base and any trailing slash —
+// then compare against the raw link paths to mark the active link.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const current =
+  (Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) : Astro.url.pathname).replace(/\/+$/, '') || '/';
+const isActive = (href: string) => current === href;
 ---
 <nav class="nav" id="nav">
-  <a class="brand" href="/" aria-label="Making Marks Tattoo Co — home">
+  <a class="brand" href={withBase('/')} aria-label="Making Marks Tattoo Co — home">
     <Monogram /><b>Making&nbsp;Marks</b>
   </a>
   <div class="navlinks">
     {NAV_LINKS.map((l) => (
       <a
-        href={l.href}
+        href={withBase(l.href)}
         class={isActive(l.href) ? 'active' : undefined}
         aria-current={isActive(l.href) ? 'page' : undefined}
       >{l.label}</a>
@@ -39,7 +42,7 @@ const isActive = (href: string) => path === href;
 <div class="mobile-menu" id="mobile-menu">
   {NAV_LINKS.map((l) => (
     <a
-      href={l.href}
+      href={withBase(l.href)}
       class={isActive(l.href) ? 'active' : undefined}
       aria-current={isActive(l.href) ? 'page' : undefined}
     >{l.label}</a>

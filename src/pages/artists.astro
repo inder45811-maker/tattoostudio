@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArtistCard from '../components/ArtistCard.astro';
 import SectionBook from '../components/SectionBook.astro';
-import { SITE, breadcrumbSchema, connorPersonSchema } from '../data/site';
+import { SITE, withBase, breadcrumbSchema, connorPersonSchema } from '../data/site';
 ---
 <BaseLayout
   title="Our Artists — Black & Grey Tattooists | Making Marks, Leamington Spa"
@@ -12,7 +12,7 @@ import { SITE, breadcrumbSchema, connorPersonSchema } from '../data/site';
   jsonLd={[breadcrumbSchema('Artists', '/artists'), connorPersonSchema]}
 >
   <section class="pagehead">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Artists</i></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Artists</i></nav>
     <h1 class="disp" data-reveal>Artists</h1>
     <p class="lede" data-reveal>The hands behind the work at Making Marks, Leamington Spa.</p>
   </section>

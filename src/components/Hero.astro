@@ -4,7 +4,7 @@
   The media frame is a placeholder until a real featured piece is dropped in.
 */
 import Placeholder from './Placeholder.astro';
-import { SITE } from '../data/site';
+import { SITE, withBase } from '../data/site';
 ---
 <header class="hero">
   <div class="hero-media" aria-hidden="true"><Placeholder /></div>
@@ -16,7 +16,7 @@ import { SITE } from '../data/site';
     <p class="lede" data-reveal>Custom tattoos, drawn from scratch — to your idea, your story, your skin. In the heart of Royal Leamington Spa.</p>
     <div class="hero-cta" data-reveal>
       <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire to book</a>
-      <a class="btn btn--ghost" href="/tattoos">View the work</a>
+      <a class="btn btn--ghost" href={withBase('/tattoos')}>View the work</a>
     </div>
   </div>
   <span class="scrollcue">Scroll</span>

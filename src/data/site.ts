@@ -29,6 +29,18 @@ export const SITE = {
   },
 } as const;
 
+/**
+ * Prefix an internal, root-relative path with the deploy base
+ * (import.meta.env.BASE_URL). At root ('/') this is a no-op, so the same code
+ * works for the custom-domain build and the GitHub Pages subpath build
+ * (e.g. '/tattoostudio/'). Use for every internal <a href>; do NOT use for
+ * canonical/OG URLs (those always point at the production origin SITE.url).
+ */
+export function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  return path === '/' ? `${base}/` : `${base}${path}`;
+}
+
 /** Primary nav links (clean URLs). */
 export const NAV_LINKS = [
   { label: 'Tattoos', href: '/tattoos' },

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBook from '../components/SectionBook.astro';
 import Placeholder from '../components/Placeholder.astro';
-import { SITE, breadcrumbSchema } from '../data/site';
+import { SITE, withBase, breadcrumbSchema } from '../data/site';
 ---
 <BaseLayout
   title="Our Story — In Memory of Mark | Making Marks Tattoo Co, Leamington Spa"
@@ -12,7 +12,7 @@ import { SITE, breadcrumbSchema } from '../data/site';
   jsonLd={[breadcrumbSchema('Our story', '/our-story')]}
 >
   <section class="pagehead">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Our story</i></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Our story</i></nav>
     <h1 class="disp" data-reveal>Making my mark.</h1>
     <p class="lede" data-reveal>How Making Marks began — and the name it carries.</p>
   </section>
@@ -45,6 +45,6 @@ import { SITE, breadcrumbSchema } from '../data/site';
 
   <SectionBook title="Make your mark with us." text="We’d love to hear what you’ve got in mind.">
     <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Enquire on Instagram</a>
-    <a class="btn btn--ghost" href="/tattoos">See the work</a>
+    <a class="btn btn--ghost" href={withBase('/tattoos')}>See the work</a>
   </SectionBook>
 </BaseLayout>

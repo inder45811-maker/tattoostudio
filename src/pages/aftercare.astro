@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBook from '../components/SectionBook.astro';
-import { SITE, breadcrumbSchema, aftercareArticleSchema } from '../data/site';
+import { SITE, withBase, breadcrumbSchema, aftercareArticleSchema } from '../data/site';
 ---
 <BaseLayout
   title="Tattoo Aftercare Guide | Making Marks Tattoo Co, Leamington Spa"
@@ -11,7 +11,7 @@ import { SITE, breadcrumbSchema, aftercareArticleSchema } from '../data/site';
   jsonLd={[breadcrumbSchema('Aftercare', '/aftercare'), aftercareArticleSchema]}
 >
   <section class="pagehead">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <i>Aftercare</i></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Aftercare</i></nav>
     <h1 class="disp" data-reveal>Tattoo aftercare</h1>
     <p class="lede" data-reveal>A new tattoo is an open wound — looking after it well keeps the work crisp for years. Here’s our general guidance.</p>
   </section>
