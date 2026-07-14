@@ -30,7 +30,7 @@ export const SITE = {
 } as const;
 
 /**
- * Live Instagram gallery feed (@cj_humps_tattoos → home page gallery strip).
+ * Live Instagram gallery feed (@cj_humps_tattoos → /artists gallery strip).
  *
  * PLACEHOLDER — empty until Connor connects his Instagram. Setup (~10 min):
  *   1. Sign up free at https://behold.so and click "Connect Instagram"
@@ -69,6 +69,7 @@ export const FOOTER_LINKS = [
   { label: 'Our story', href: '/our-story' },
   { label: 'Artists', href: '/artists' },
   { label: 'Aftercare', href: '/aftercare' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'Visit', href: '/visit' },
 ] as const;
 

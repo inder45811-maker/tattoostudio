@@ -5,20 +5,16 @@ import WorkTile from '../components/WorkTile.astro';
 import ArtistCard from '../components/ArtistCard.astro';
 import MapPlaceholder from '../components/MapPlaceholder.astro';
 import Placeholder from '../components/Placeholder.astro';
-import GalleryStrip from '../components/GalleryStrip.astro';
-import AftercareSteps from '../components/AftercareSteps.astro';
-import FaqSection from '../components/FaqSection.astro';
 import ContactSection from '../components/ContactSection.astro';
-import { SITE, INSTAGRAM_FEED_URL, withBase, tattooParlorSchema } from '../data/site';
-import { homePreview, galleryStrip } from '../data/tattoos';
-import { faqPageSchema } from '../data/faqs';
+import { SITE, withBase, tattooParlorSchema } from '../data/site';
+import { homePreview } from '../data/tattoos';
 ---
 <BaseLayout
   title="Making Marks Tattoo Co | Black & Grey Tattoo Studio in Leamington Spa"
   description="Custom black & grey tattoos in the heart of Royal Leamington Spa. Bespoke realism, fine line and lettering by Making Marks Tattoo Co. Established 2021."
   canonical={`${SITE.url}/`}
   ogType="website"
-  jsonLd={[tattooParlorSchema, faqPageSchema()]}
+  jsonLd={[tattooParlorSchema]}
 >
   <Hero />
 
@@ -92,17 +88,7 @@ import { faqPageSchema } from '../data/faqs';
         hiring
       />
     </div>
-    <GalleryStrip
-      items={galleryStrip}
-      label="From the studio — latest pieces"
-      feedUrl={INSTAGRAM_FEED_URL}
-      feedHandle="@cj_humps_tattoos"
-    />
   </section>
-
-  <AftercareSteps />
-
-  <FaqSection />
 
   <section class="section visit" data-accent="visit">
     <div class="visit-wrap">

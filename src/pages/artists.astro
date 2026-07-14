@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArtistCard from '../components/ArtistCard.astro';
+import GalleryStrip from '../components/GalleryStrip.astro';
 import SectionBook from '../components/SectionBook.astro';
-import { SITE, withBase, breadcrumbSchema, connorPersonSchema } from '../data/site';
+import { SITE, INSTAGRAM_FEED_URL, withBase, breadcrumbSchema, connorPersonSchema } from '../data/site';
+import { galleryStrip } from '../data/tattoos';
 ---
 <BaseLayout
   title="Our Artists — Black & Grey Tattooists | Making Marks, Leamington Spa"
@@ -48,6 +50,12 @@ import { SITE, withBase, breadcrumbSchema, connorPersonSchema } from '../data/si
         hiring
       />
     </div>
+    <GalleryStrip
+      items={galleryStrip}
+      label="From the studio — latest pieces"
+      feedUrl={INSTAGRAM_FEED_URL}
+      feedHandle="@cj_humps_tattoos"
+    />
   </section>
 
   <SectionBook

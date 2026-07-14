@@ -1,7 +1,7 @@
 /*
   FAQ content — every answer is composed strictly from the studio's confirmed
   facts (booking flow, styles, hours, parking, aftercare guidance). Add or edit
-  questions here; the FaqSection accordion and the FAQPage JSON-LD both render
+  questions here; the /faq page accordion and its FAQPage JSON-LD both render
   from this one list.
 */
 

@@ -29,10 +29,11 @@ canonical, Open Graph/Twitter tags and JSON-LD structured data.
 | `/our-story` | `src/pages/our-story.astro` | `BreadcrumbList`                       |
 | `/artists`   | `src/pages/artists.astro` | `BreadcrumbList` + `Person` (Connor)     |
 | `/aftercare` | `src/pages/aftercare.astro` | `BreadcrumbList` + `Article`           |
+| `/faq`       | `src/pages/faq.astro`     | `BreadcrumbList` + `FAQPage`             |
 | `/visit`     | `src/pages/visit.astro`   | `BreadcrumbList` + `TattooParlor`        |
 
 `robots.txt` and `sitemap-index.xml` (via `@astrojs/sitemap`) are generated for
-all six routes.
+all seven routes.
 
 ## Structure
 
@@ -52,7 +53,7 @@ scripts/make-og.mjs   Generates the placeholder share image
 
 ## Live Instagram gallery (@cj_humps_tattoos)
 
-The home page gallery strip can pull Connor's latest Instagram posts and update
+The gallery strip on the artists page can pull Connor's latest Instagram posts and update
 automatically whenever he posts. It's wired but dormant until his account is
 connected (a ~10 minute one-time step):
 
@@ -93,10 +94,12 @@ Everything below is a clearly-marked placeholder, designed to swap cleanly:
   ember). A section opts in with `data-accent="…"`; accents touch only
   micro-elements (eyebrows, bullets, markers, hover hairlines) so the
   monochrome base survives. Change a hue by editing one token line.
-- **Home page flow:** Hero → strip → Recent pieces → Story → Artists (cards
-  with Instagram links + horizontal gallery strip) → Aftercare steps → FAQ
-  accordion → Visit → Contact (bottom). FAQ copy lives in `src/data/faqs.ts`
-  and also feeds the `FAQPage` JSON-LD.
+- **Home page flow (kept deliberately simple):** Hero → strip → Recent pieces →
+  Story → Artists preview → Visit → Contact (bottom). The detail lives on the
+  dedicated pages: the gallery strip sits at the bottom of `/artists`, the
+  aftercare guide renders as step blocks on `/aftercare`, and the FAQ accordion
+  has its own `/faq` page (copy in `src/data/faqs.ts`, which also feeds its
+  `FAQPage` JSON-LD).
 
 - Design tokens, type scale and rules are ported verbatim from the prototype's
   CSS into `src/styles/global.css`.

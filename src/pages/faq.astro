@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBook from '../components/SectionBook.astro';
+import { SITE, withBase, breadcrumbSchema } from '../data/site';
+import { faqs, faqPageSchema } from '../data/faqs';
+---
+<BaseLayout
+  title="FAQ — Booking, Custom Designs & Aftercare | Making Marks, Leamington Spa"
+  description="Answers to common questions about getting tattooed at Making Marks in Leamington Spa — how to book, custom designs, cover-ups, opening hours, parking and aftercare."
+  canonical={`${SITE.url}/faq`}
+  ogType="website"
+  jsonLd={[breadcrumbSchema('FAQ', '/faq'), faqPageSchema()]}
+>
+  <section class="pagehead" data-accent="faq">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>FAQ</i></nav>
+    <h1 class="disp" data-reveal>Good to know</h1>
+    <p class="lede" data-reveal>The questions we get asked most — booking, designs, hours and healing.</p>
+  </section>
+
+  <section class="section" data-accent="faq" style="padding-top:clamp(40px,6vw,72px)">
+    <div class="faq" data-reveal>
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.question}</summary>
+          <div class="faq-body">
+            <p>{f.answer}</p>
+            {f.link && <p style="margin-top:.6em"><a href={withBase(f.link.href)}>{f.link.label}</a></p>}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <SectionBook title="Ask us anything." text="If it’s not covered here, drop us a message — we’re happy to help.">
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.email}>Email us</a>
+  </SectionBook>
+</BaseLayout>
