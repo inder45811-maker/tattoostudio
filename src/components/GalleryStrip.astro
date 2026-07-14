@@ -2,7 +2,14 @@
 /*
   Horizontal photo strip / carousel. Native scroll with snap points — swipe on
   touch, arrow buttons on desktop (hidden <=760px where swiping is natural).
-  Items reuse WorkTile, so real photos drop in via the same data as the grids.
+
+  Two content modes:
+  - Static (default): renders `items` as WorkTile placeholder frames.
+  - Live Instagram: when `feedUrl` is set (see INSTAGRAM_FEED_URL in
+    src/data/site.ts), a client script fetches the Behold JSON feed and swaps
+    the placeholders for the account's latest posts, each linking to the post
+    on Instagram. Any failure (no URL, network, unexpected shape) leaves the
+    placeholders untouched — progressive enhancement only.
 */
 import WorkTile from './WorkTile.astro';
 import type { WorkItem } from '../data/tattoos';
@@ -10,10 +17,14 @@ import type { WorkItem } from '../data/tattoos';
 interface Props {
   items: WorkItem[];
   label: string;
+  /** Behold JSON feed URL; empty/omitted keeps the static placeholders. */
+  feedUrl?: string;
+  /** Instagram handle used in fallback alt text for live tiles. */
+  feedHandle?: string;
 }
-const { items, label } = Astro.props;
+const { items, label, feedUrl = '', feedHandle = '' } = Astro.props;
 ---
-<div class="gallery" data-reveal>
+<div class="gallery" data-reveal data-feed={feedUrl || undefined} data-handle={feedHandle || undefined}>
   <div class="gallery-head">
     <span class="cap">{label}</span>
     <div class="gallery-nav">
@@ -28,7 +39,8 @@ const { items, label } = Astro.props;
 
 <script>
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll<HTMLElement>('.gallery').forEach((gallery) => {
+
+  function wireArrows(gallery: HTMLElement) {
     const track = gallery.querySelector<HTMLElement>('.gallery-track');
     if (!track) return;
     gallery.querySelectorAll<HTMLButtonElement>('.gallery-nav button').forEach((btn) => {
@@ -40,5 +52,79 @@ const { items, label } = Astro.props;
         });
       });
     });
+  }
+
+  interface FeedPost {
+    permalink?: string;
+    mediaType?: string;
+    media_type?: string;
+    mediaUrl?: string;
+    media_url?: string;
+    thumbnailUrl?: string;
+    thumbnail_url?: string;
+    sizes?: Record<string, { mediaUrl?: string }>;
+    caption?: string;
+    prunedCaption?: string;
+    altText?: string;
+  }
+
+  function postImage(post: FeedPost): string | null {
+    const type = post.mediaType || post.media_type || 'IMAGE';
+    const sized = post.sizes?.medium?.mediaUrl || post.sizes?.large?.mediaUrl || post.sizes?.full?.mediaUrl;
+    if (type === 'VIDEO') return sized || post.thumbnailUrl || post.thumbnail_url || null;
+    return sized || post.mediaUrl || post.media_url || null;
+  }
+
+  function shortCaption(post: FeedPost): string {
+    const raw = (post.prunedCaption || post.caption || '').split('\n')[0].trim();
+    if (!raw) return 'View on Instagram';
+    return raw.length > 44 ? `${raw.slice(0, 43).trimEnd()}…` : raw;
+  }
+
+  async function loadFeed(gallery: HTMLElement) {
+    const url = gallery.dataset.feed;
+    const track = gallery.querySelector<HTMLElement>('.gallery-track');
+    if (!url || !track) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`feed HTTP ${res.status}`);
+      const json = await res.json();
+      const posts: FeedPost[] = Array.isArray(json) ? json : json.posts || json.data || [];
+      const handle = gallery.dataset.handle || '';
+      const tiles: HTMLElement[] = [];
+      for (const post of posts.slice(0, 12)) {
+        const src = postImage(post);
+        if (!src || !post.permalink) continue;
+        const a = document.createElement('a');
+        a.className = 'tile tile--live';
+        a.href = post.permalink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        const alt = post.altText || (handle ? `Instagram post by ${handle}` : 'Instagram post');
+        a.setAttribute('aria-label', alt);
+        const ph = document.createElement('div');
+        ph.className = 'ph';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = alt;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        ph.appendChild(img);
+        const tag = document.createElement('span');
+        tag.className = 'figtag cap';
+        tag.textContent = shortCaption(post);
+        a.append(ph, tag);
+        tiles.push(a);
+      }
+      // Only swap the placeholders once we have real posts to show.
+      if (tiles.length) track.replaceChildren(...tiles);
+    } catch (err) {
+      console.warn('Instagram feed unavailable, keeping placeholder gallery:', err);
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.gallery').forEach((gallery) => {
+    wireArrows(gallery);
+    loadFeed(gallery);
   });
 </script>

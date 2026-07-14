@@ -50,6 +50,25 @@ src/
 scripts/make-og.mjs   Generates the placeholder share image
 ```
 
+## Live Instagram gallery (@cj_humps_tattoos)
+
+The home page gallery strip can pull Connor's latest Instagram posts and update
+automatically whenever he posts. It's wired but dormant until his account is
+connected (a ~10 minute one-time step):
+
+1. Sign up free at [behold.so](https://behold.so) and click **Connect
+   Instagram** — Connor logs in once (his account must be an Instagram
+   Professional account; Creator or Business, free to switch).
+2. Create a feed, set its format to **JSON**, and copy the feed URL
+   (`https://feeds.behold.so/…`).
+3. Paste it into `INSTAGRAM_FEED_URL` in `src/data/site.ts` and push.
+
+The strip then renders his latest posts (free Behold plan = 6 posts), each
+linking to the post on Instagram. If the feed URL is empty or the feed ever
+fails, the strip silently falls back to the placeholder frames — the site never
+breaks. Note this is the one deliberate exception to the "no external runtime
+dependencies" rule, chosen for instant updates without running a server.
+
 ## Swapping in real content (placeholders)
 
 Everything below is a clearly-marked placeholder, designed to swap cleanly:

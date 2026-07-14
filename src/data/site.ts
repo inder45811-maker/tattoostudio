@@ -30,6 +30,20 @@ export const SITE = {
 } as const;
 
 /**
+ * Live Instagram gallery feed (@cj_humps_tattoos → home page gallery strip).
+ *
+ * PLACEHOLDER — empty until Connor connects his Instagram. Setup (~10 min):
+ *   1. Sign up free at https://behold.so and click "Connect Instagram"
+ *      (Connor logs in once; his account must be a Professional account).
+ *   2. Create a feed, set its format to JSON, and copy the feed URL
+ *      (looks like https://feeds.behold.so/XXXXXXXX).
+ *   3. Paste it here and push — the gallery strip then shows his latest posts
+ *      and updates automatically when he posts. While this is empty (or if the
+ *      feed ever fails), the strip falls back to the placeholder frames.
+ */
+export const INSTAGRAM_FEED_URL = '';
+
+/**
  * Prefix an internal, root-relative path with the deploy base
  * (import.meta.env.BASE_URL). At root ('/') this is a no-op, so the same code
  * works for the custom-domain build and the GitHub Pages subpath build

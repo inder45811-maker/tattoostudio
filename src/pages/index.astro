@@ -9,7 +9,7 @@ import GalleryStrip from '../components/GalleryStrip.astro';
 import AftercareSteps from '../components/AftercareSteps.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ContactSection from '../components/ContactSection.astro';
-import { SITE, withBase, tattooParlorSchema } from '../data/site';
+import { SITE, INSTAGRAM_FEED_URL, withBase, tattooParlorSchema } from '../data/site';
 import { homePreview, galleryStrip } from '../data/tattoos';
 import { faqPageSchema } from '../data/faqs';
 ---
@@ -92,7 +92,12 @@ import { faqPageSchema } from '../data/faqs';
         hiring
       />
     </div>
-    <GalleryStrip items={galleryStrip} label="From the studio — latest pieces" />
+    <GalleryStrip
+      items={galleryStrip}
+      label="From the studio — latest pieces"
+      feedUrl={INSTAGRAM_FEED_URL}
+      feedHandle="@cj_humps_tattoos"
+    />
   </section>
 
   <AftercareSteps />
