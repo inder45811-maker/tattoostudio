@@ -1,0 +1,57 @@
+---
+/*
+  Aftercare section for the home page — the guide's three healing phases as
+  step blocks (a genuine temporal sequence: first 48 hours → two weeks →
+  healed). Copy is taken directly from the full aftercare guide, which the
+  final link points to.
+*/
+import { withBase } from '../data/site';
+
+const steps = [
+  {
+    no: 'Step 01 · First 24–48 hours',
+    heading: 'Fresh',
+    items: [
+      'Leave the covering on for as long as your artist advises.',
+      'Wash gently with clean hands and a fragrance-free soap, then pat dry with a clean towel.',
+    ],
+  },
+  {
+    no: 'Step 02 · Roughly two weeks',
+    heading: 'Healing',
+    items: [
+      'Keep it clean and moisturise lightly two to three times a day.',
+      'Don’t pick or scratch — and avoid soaking: no baths, swimming, saunas or steam rooms.',
+    ],
+  },
+  {
+    no: 'Step 03 · From then on',
+    heading: 'Healed',
+    items: [
+      'Use a high SPF to keep black & grey looking sharp.',
+      'Moisturise regularly — well-kept skin holds a tattoo beautifully over time.',
+    ],
+  },
+];
+---
+<section class="section" id="aftercare" data-accent="care">
+  <div class="head">
+    <div>
+      <span class="eyebrow" data-reveal>Aftercare</span>
+      <h2 class="disp" data-reveal style="margin-top:.2em">Look after the work</h2>
+    </div>
+    <a class="morelink" data-reveal href={withBase('/aftercare')}>Full aftercare guide →</a>
+  </div>
+  <p class="lede" data-reveal>A new tattoo is an open wound — looking after it well keeps the work crisp for years.</p>
+  <div class="steps">
+    {steps.map((step) => (
+      <article class="step" data-reveal>
+        <span class="step-no">{step.no}</span>
+        <h3>{step.heading}</h3>
+        <ul>
+          {step.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

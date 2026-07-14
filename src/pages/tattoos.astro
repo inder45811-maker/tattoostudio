@@ -12,13 +12,13 @@ import { tattooGroups } from '../data/tattoos';
   ogType="website"
   jsonLd={[breadcrumbSchema('Tattoos', '/tattoos')]}
 >
-  <section class="pagehead">
+  <section class="pagehead" data-accent="work">
     <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Tattoos</i></nav>
     <h1 class="disp" data-reveal>Tattoos</h1>
     <p class="lede" data-reveal>Black &amp; grey realism, fine line and custom lettering — every design drawn from scratch and tattooed in our Leamington Spa studio. A selection of recent work below.</p>
   </section>
 
-  <section class="section" style="padding-top:clamp(48px,7vw,84px)">
+  <section class="section" data-accent="work" style="padding-top:clamp(48px,7vw,84px)">
     {tattooGroups.map((group, i) => (
       <div class:list={['style-block', { first: i === 0 }]}>
         <div class="sb-head">

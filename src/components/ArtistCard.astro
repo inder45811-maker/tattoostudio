@@ -4,6 +4,7 @@
   Instagram handle / call-to-action link.
 */
 import Placeholder from './Placeholder.astro';
+import InstagramIcon from './InstagramIcon.astro';
 
 interface Props {
   name: string;
@@ -36,6 +37,9 @@ const {
 } = Astro.props;
 
 const external = handleHref.startsWith('http');
+// Show the Instagram glyph on links that lead to a profile (incl. the
+// placeholder "@handle" slot, which will point at Instagram once filled in).
+const isInstagram = handleHref.includes('instagram.com') || handle.startsWith('@');
 ---
 <article class="card" data-reveal>
   {image ? (
@@ -57,7 +61,7 @@ const external = handleHref.startsWith('http');
       class="card-handle"
       href={handleHref}
       {...(external ? { target: '_blank', rel: 'noopener' } : {})}
-    >{handle}</a>
+    >{isInstagram && <InstagramIcon />}{handle}</a>
   </div>
 </article>
 

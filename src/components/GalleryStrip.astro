@@ -1,0 +1,44 @@
+---
+/*
+  Horizontal photo strip / carousel. Native scroll with snap points — swipe on
+  touch, arrow buttons on desktop (hidden <=760px where swiping is natural).
+  Items reuse WorkTile, so real photos drop in via the same data as the grids.
+*/
+import WorkTile from './WorkTile.astro';
+import type { WorkItem } from '../data/tattoos';
+
+interface Props {
+  items: WorkItem[];
+  label: string;
+}
+const { items, label } = Astro.props;
+---
+<div class="gallery" data-reveal>
+  <div class="gallery-head">
+    <span class="cap">{label}</span>
+    <div class="gallery-nav">
+      <button type="button" data-dir="-1" aria-label="Scroll gallery back">←</button>
+      <button type="button" data-dir="1" aria-label="Scroll gallery forward">→</button>
+    </div>
+  </div>
+  <div class="gallery-track" tabindex="0" role="group" aria-label={label}>
+    {items.map((item) => <WorkTile label={item.label} alt={item.alt} image={item.image} />)}
+  </div>
+</div>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.gallery').forEach((gallery) => {
+    const track = gallery.querySelector<HTMLElement>('.gallery-track');
+    if (!track) return;
+    gallery.querySelectorAll<HTMLButtonElement>('.gallery-nav button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const dir = Number(btn.dataset.dir) || 1;
+        track.scrollBy({
+          left: dir * track.clientWidth * 0.85,
+          behavior: reduce ? 'auto' : 'smooth',
+        });
+      });
+    });
+  });
+</script>

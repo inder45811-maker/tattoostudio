@@ -11,13 +11,13 @@ import { SITE, withBase, breadcrumbSchema, connorPersonSchema } from '../data/si
   ogType="website"
   jsonLd={[breadcrumbSchema('Artists', '/artists'), connorPersonSchema]}
 >
-  <section class="pagehead">
+  <section class="pagehead" data-accent="artists">
     <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Artists</i></nav>
     <h1 class="disp" data-reveal>Artists</h1>
     <p class="lede" data-reveal>The hands behind the work at Making Marks, Leamington Spa.</p>
   </section>
 
-  <section class="section" style="padding-top:clamp(40px,6vw,72px)">
+  <section class="section" data-accent="artists" style="padding-top:clamp(40px,6vw,72px)">
     <div class="artists-grid" style="margin-top:0">
       <ArtistCard
         name="Connor Humpage"

@@ -1,0 +1,37 @@
+---
+/*
+  Contact section — anchored at the very bottom of the home page (above the
+  footer). The booking CTAs plus the studio's full contact details in three
+  scannable blocks: where, when, how.
+*/
+import InstagramIcon from './InstagramIcon.astro';
+import { SITE } from '../data/site';
+---
+<section class="section book" id="contact" data-accent="work">
+  <span class="eyebrow" data-reveal style="justify-content:center">Contact us</span>
+  <h2 class="disp" data-reveal style="margin-top:.2em">Ready to make yours?</h2>
+  <p data-reveal>Tattoo enquiries are taken through Instagram DM. We’ll talk through your idea, then confirm your booking on Fresha.</p>
+  <div class="book-cta" data-reveal>
+    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
+    <a class="btn btn--ghost" href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
+    <a class="btn btn--ghost" href={SITE.links.email}>Email us</a>
+  </div>
+  <div class="contact-cols" data-reveal>
+    <div class="contact-col">
+      <h4>Find us</h4>
+      <p>102 Regent Street</p>
+      <p>Royal Leamington Spa</p>
+      <p>CV32 4NR</p>
+    </div>
+    <div class="contact-col">
+      <h4>Hours</h4>
+      <p>Tue — Sat · 10:00 — 17:00</p>
+      <p>Mon &amp; Sun · Closed</p>
+    </div>
+    <div class="contact-col">
+      <h4>Reach us</h4>
+      <a href={SITE.links.instagram} target="_blank" rel="noopener"><InstagramIcon /> @making_marks_tattoo</a>
+      <a href={SITE.links.email}>info@makingmarks-tattoo.co.uk</a>
+    </div>
+  </div>
+</section>

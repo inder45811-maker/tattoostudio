@@ -68,6 +68,17 @@ Everything below is a clearly-marked placeholder, designed to swap cleanly:
 
 ## Design & behaviour notes
 
+- **Section accent system (client feedback round 1):** six muted accent tokens
+  in `src/styles/global.css` (`--acc-work` brass, `--acc-story` rose,
+  `--acc-artists` steel, `--acc-care` sage, `--acc-faq` violet, `--acc-visit`
+  ember). A section opts in with `data-accent="…"`; accents touch only
+  micro-elements (eyebrows, bullets, markers, hover hairlines) so the
+  monochrome base survives. Change a hue by editing one token line.
+- **Home page flow:** Hero → strip → Recent pieces → Story → Artists (cards
+  with Instagram links + horizontal gallery strip) → Aftercare steps → FAQ
+  accordion → Visit → Contact (bottom). FAQ copy lives in `src/data/faqs.ts`
+  and also feeds the `FAQPage` JSON-LD.
+
 - Design tokens, type scale and rules are ported verbatim from the prototype's
   CSS into `src/styles/global.css`.
 - The display typeface is self-hosted **Archivo Variable** (`@fontsource-variable/archivo`,

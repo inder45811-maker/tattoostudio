@@ -10,13 +10,13 @@ import { SITE, withBase, breadcrumbSchema, aftercareArticleSchema } from '../dat
   ogType="article"
   jsonLd={[breadcrumbSchema('Aftercare', '/aftercare'), aftercareArticleSchema]}
 >
-  <section class="pagehead">
+  <section class="pagehead" data-accent="care">
     <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Aftercare</i></nav>
     <h1 class="disp" data-reveal>Tattoo aftercare</h1>
     <p class="lede" data-reveal>A new tattoo is an open wound — looking after it well keeps the work crisp for years. Here’s our general guidance.</p>
   </section>
 
-  <section class="section" style="padding-top:clamp(40px,6vw,72px)">
+  <section class="section" data-accent="care" style="padding-top:clamp(40px,6vw,72px)">
     <div class="prose">
       <h2 class="first" data-reveal>The first 24–48 hours</h2>
       <ul>

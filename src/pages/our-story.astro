@@ -11,13 +11,13 @@ import { SITE, withBase, breadcrumbSchema } from '../data/site';
   ogType="article"
   jsonLd={[breadcrumbSchema('Our story', '/our-story')]}
 >
-  <section class="pagehead">
+  <section class="pagehead" data-accent="story">
     <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Our story</i></nav>
     <h1 class="disp" data-reveal>Making my mark.</h1>
     <p class="lede" data-reveal>How Making Marks began — and the name it carries.</p>
   </section>
 
-  <section class="section story" style="border-top:none">
+  <section class="section story" data-accent="story" style="border-top:none">
     <div class="story-wrap">
       <div>
         <span class="eyebrow" data-reveal>The name</span>
@@ -33,7 +33,7 @@ import { SITE, withBase, breadcrumbSchema } from '../data/site';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-accent="story">
     <div class="prose">
       <h2 class="first" data-reveal>The studio</h2>
       <p data-reveal>Set in the heart of Royal Leamington Spa on Regent Street, the studio was built to turn getting tattooed into something you look forward to — a calm, considered space with interiors to match the work that comes out of it.</p>

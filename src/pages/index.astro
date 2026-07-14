@@ -4,17 +4,21 @@ import Hero from '../components/Hero.astro';
 import WorkTile from '../components/WorkTile.astro';
 import ArtistCard from '../components/ArtistCard.astro';
 import MapPlaceholder from '../components/MapPlaceholder.astro';
-import SectionBook from '../components/SectionBook.astro';
 import Placeholder from '../components/Placeholder.astro';
+import GalleryStrip from '../components/GalleryStrip.astro';
+import AftercareSteps from '../components/AftercareSteps.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ContactSection from '../components/ContactSection.astro';
 import { SITE, withBase, tattooParlorSchema } from '../data/site';
-import { homePreview } from '../data/tattoos';
+import { homePreview, galleryStrip } from '../data/tattoos';
+import { faqPageSchema } from '../data/faqs';
 ---
 <BaseLayout
   title="Making Marks Tattoo Co | Black & Grey Tattoo Studio in Leamington Spa"
   description="Custom black & grey tattoos in the heart of Royal Leamington Spa. Bespoke realism, fine line and lettering by Making Marks Tattoo Co. Established 2021."
   canonical={`${SITE.url}/`}
   ogType="website"
-  jsonLd={[tattooParlorSchema]}
+  jsonLd={[tattooParlorSchema, faqPageSchema()]}
 >
   <Hero />
 
@@ -23,7 +27,7 @@ import { homePreview } from '../data/tattoos';
     <span class="cap">Realism · Fine line · Lettering · Cover-ups</span>
   </section>
 
-  <section class="section">
+  <section class="section" data-accent="work">
     <div class="head">
       <div>
         <span class="eyebrow" data-reveal>Selected work</span>
@@ -38,7 +42,7 @@ import { homePreview } from '../data/tattoos';
     </div>
   </section>
 
-  <section class="section story">
+  <section class="section story" data-accent="story">
     <div class="story-wrap">
       <div>
         <span class="eyebrow" data-reveal>The name</span>
@@ -53,7 +57,7 @@ import { homePreview } from '../data/tattoos';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-accent="artists">
     <div class="head">
       <div>
         <span class="eyebrow" data-reveal>The team</span>
@@ -88,9 +92,14 @@ import { homePreview } from '../data/tattoos';
         hiring
       />
     </div>
+    <GalleryStrip items={galleryStrip} label="From the studio — latest pieces" />
   </section>
 
-  <section class="section visit">
+  <AftercareSteps />
+
+  <FaqSection />
+
+  <section class="section visit" data-accent="visit">
     <div class="visit-wrap">
       <div>
         <span class="eyebrow" data-reveal>Visit</span>
@@ -107,12 +116,5 @@ import { homePreview } from '../data/tattoos';
     </div>
   </section>
 
-  <SectionBook
-    title="Ready to make yours?"
-    text="Tattoo enquiries are taken through Instagram DM. We’ll talk through your idea, then confirm your booking on Fresha."
-  >
-    <a class="btn btn--solid" href={SITE.links.instagram} target="_blank" rel="noopener">Message on Instagram</a>
-    <a class="btn btn--ghost" href={SITE.links.fresha} target="_blank" rel="noopener">Book on Fresha</a>
-    <a class="btn btn--ghost" href={SITE.links.email}>Email us</a>
-  </SectionBook>
+  <ContactSection />
 </BaseLayout>

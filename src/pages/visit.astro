@@ -11,13 +11,13 @@ import { SITE, withBase, breadcrumbSchema, tattooParlorSchema } from '../data/si
   ogType="website"
   jsonLd={[breadcrumbSchema('Visit', '/visit'), tattooParlorSchema]}
 >
-  <section class="pagehead">
+  <section class="pagehead" data-accent="visit">
     <nav class="crumbs" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a> / <i>Visit</i></nav>
     <h1 class="disp" data-reveal>Visit us</h1>
     <p class="lede" data-reveal>Find us on Regent Street in the centre of Royal Leamington Spa — a short walk from the Parade and Royal Priors.</p>
   </section>
 
-  <section class="section visit" style="border-top:none">
+  <section class="section visit" data-accent="visit" style="border-top:none">
     <div class="visit-wrap">
       <div>
         <span class="eyebrow" data-reveal>The studio</span>

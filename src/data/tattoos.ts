@@ -52,6 +52,12 @@ export const tattooGroups: TattooGroup[] = [
   },
 ];
 
+/**
+ * Flat list for the horizontal gallery strip (home page, artists section).
+ * Reuses the portfolio items; swap in real photos via tattooGroups above.
+ */
+export const galleryStrip: WorkItem[] = tattooGroups.flatMap((g) => g.items);
+
 /** Curated three-tile selection shown on the home page. */
 export const homePreview: WorkItem[] = [
   { label: 'Realism · koala', alt: 'Black and grey koala realism tattoo on forearm', image: null },
